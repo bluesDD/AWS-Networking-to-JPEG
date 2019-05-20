@@ -14,8 +14,12 @@
     <br>
     <v-switch
       v-model="switch1"
-      :label="`Switch 1: ${switch1.toString()}`"
+      :label="`Load Balanceの有無 : ${StringtrueOrfalse(switch1)}`"
+      :value="trueOrfalse(switch1)"
+
     ></v-switch>
+    <br>
+    <img class="img" :src="this.$store.state.testImage" />
       <p>store: {{ this.$store.state.hogeFromStore }}</p>
       <button v-on:click="$store.dispatch('writeHoge', '直接、値を書き換えます')">Test</button>
       <button v-on:click="$store.dispatch('writeHoge', 'Hello, Vuex')">Test2</button>
@@ -55,6 +59,12 @@ export default {
       this.$store.dispatch('writeHoge', 'メソッドからの書き換え')
       console.log(this.$store.state.hogeFromStore)
 
+    },
+    trueOrfalse: function(switch1) {
+      return switch1 ? this.$store.dispatch('writeTestImage','/Elastic-Load-Balancing-ELB.png') : this.$store.dispatch('writeTestImage','')
+    },
+    StringtrueOrfalse: function(switch1) {
+      return switch1 ? 'あり' : 'なし'
     }
   },
 
@@ -87,6 +97,7 @@ export default {
   },
 }
 </script>
+
 
 <style>
   .custom-loader {

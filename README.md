@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 AWS-Networking-to-JPEG
 We plan to launch "AWS Networking to JPEG".
 
@@ -27,9 +26,3 @@ $ npm run generate
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
 
-=======
-# AWS-Networking-to-JPEG
-We plan to  launch "AWS Networking to JPEG". 
-
-moqup link : https://app.moqups.com/EK3IiCaxeQ/view/page/aa9df7b72
->>>>>>> 81107284de42e60772d4fc77c04d338219e5beb1
