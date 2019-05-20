@@ -1,7 +1,7 @@
 export const state = () => ({
   hogeFromStore: 'Hello, Vuex',
   testImage: '/Elastic-Load-Balancing-ELB.png',
-  testImage2: 'https://s3-ap-northeast-1.amazonaws.com/takuto/test1/test1test1/01.jpg'
+  testImage2: '/Amazon-Simple-Storage-Service-S3.png'
 })
 
 export const mutations = {
@@ -10,7 +10,10 @@ export const mutations = {
   },
   setTestImage(state, value) {
     state.testImage = value
-  }
+  },
+  setTestImage2(state, value) {
+    state.testImage2 = value
+  },
 }
 
 export const actions = {
@@ -19,7 +22,10 @@ export const actions = {
   },
   writeTestImage(context, value) {
     context.commit('setTestImage', value)
-  }
+  },
+  writeTestImage2(context, value) {
+    context.commit('setTestImage2', value)
+  },
 }
 
 

@@ -16,6 +16,13 @@
       v-model="switch1"
       :label="`Load Balanceの有無 : ${StringtrueOrfalse(switch1)}`"
       :value="trueOrfalse(switch1)"
+    ></v-switch>
+    <br>
+    <img class="img" :src="this.$store.state.testImage2" />
+    <v-switch
+      v-model="switch2"
+      :label="`S3の有無 : ${StringtrueOrfalse2(switch2)}`"
+      :value="trueOrfalse(switch2)"
 
     ></v-switch>
     <br>
@@ -63,9 +70,15 @@ export default {
     trueOrfalse: function(switch1) {
       return switch1 ? this.$store.dispatch('writeTestImage','/Elastic-Load-Balancing-ELB.png') : this.$store.dispatch('writeTestImage','')
     },
+    trueOrfalse2: function(switch2) {
+      return switch2 ? this.$store.dispatch('writeTestImage','/Amazon-Simple-Storage-Service-S3.png') : this.$store.dispatch('writeTestImage','')
+    },
     StringtrueOrfalse: function(switch1) {
       return switch1 ? 'あり' : 'なし'
-    }
+    },
+    StringtrueOrfalse2: function(switch2) {
+      return switch2 ? 'あり' : 'なし'
+    },
   },
 
   data() {
@@ -78,6 +91,7 @@ export default {
       rightDrawer: false,
       title: 'AWS Networking to JPEG',
       switch1: true,
+      switch2: true,
       loader: null,
       loading: false,
       loading2: false,
@@ -89,11 +103,11 @@ export default {
     loader() {
        const l = this.loader
         this[l] = !this[l]
-
         setTimeout(() => (this[l] = false), 3000)
-
         this.loader = null
-    }
+    },
+
+
   },
 }
 </script>
