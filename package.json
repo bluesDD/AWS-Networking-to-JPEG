@@ -1,7 +1,6 @@
 {
   "name": "test",
   "version": "1.0.0",
-<<<<<<< HEAD
   "description": "My epic Nuxt.js project",
   "author": "bluesDD",
   "private": true,
@@ -30,13 +29,4 @@
     "jest": "^24.1.0",
     "vue-jest": "^3.0.3"
   }
-=======
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
->>>>>>> 81107284de42e60772d4fc77c04d338219e5beb1
 }
