@@ -14,25 +14,24 @@
     <br>
     <v-switch
       v-model="switch1"
-      :label="`Load Balanceの有無 : ${StringtrueOrfalse(switch1)}`"
-      :value="trueOrfalse(switch1)"
-    ></v-switch>
-    <br>
-    <img class="img" :src="this.$store.state.testImage2" />
-    <v-switch
-      v-model="switch2"
-      :label="`S3の有無 : ${StringtrueOrfalse2(switch2)}`"
-      :value="trueOrfalse(switch2)"
-
+      :label="`Load Balanceの有無 : ${StringtrueOrfalse}`"
+      :value="trueOrfalse"
     ></v-switch>
     <br>
     <img class="img" :src="this.$store.state.testImage" />
+    <v-switch
+      v-model="switch2"
+      :label="`S3の有無 : ${StringtrueOrfalse2}`"
+      :value="trueOrfalse2"
+
+    ></v-switch>
+    <br>
+    <img class="img" :src="this.$store.state.testImage2" />
       <p>store: {{ this.$store.state.hogeFromStore }}</p>
       <button v-on:click="$store.dispatch('writeHoge', '直接、値を書き換えます')">Test</button>
       <button v-on:click="$store.dispatch('writeHoge', 'Hello, Vuex')">Test2</button>
       <button v-on:click="testMethod()">Test3</button>
     <dir>
-
     <v-btn
       :loading="loading3"
       :disabled="loading3"
@@ -43,7 +42,6 @@
       Download
       <v-icon right dark>cloud_download</v-icon>
     </v-btn>
-
     </dir>
 
   </v-container >
@@ -61,26 +59,26 @@
 <script>
 export default {
   methods: {
-    testMethod: function() {
+    testMethod() {
       console.log(this.$store.state.hogeFromStore)
       this.$store.dispatch('writeHoge', 'メソッドからの書き換え')
       console.log(this.$store.state.hogeFromStore)
-
-    },
-    trueOrfalse: function(switch1) {
-      return switch1 ? this.$store.dispatch('writeTestImage','/Elastic-Load-Balancing-ELB.png') : this.$store.dispatch('writeTestImage','')
-    },
-    trueOrfalse2: function(switch2) {
-      return switch2 ? this.$store.dispatch('writeTestImage','/Amazon-Simple-Storage-Service-S3.png') : this.$store.dispatch('writeTestImage','')
-    },
-    StringtrueOrfalse: function(switch1) {
-      return switch1 ? 'あり' : 'なし'
-    },
-    StringtrueOrfalse2: function(switch2) {
-      return switch2 ? 'あり' : 'なし'
     },
   },
-
+  computed:{
+    StringtrueOrfalse: function () {
+      return this.switch1 ? 'あり' : 'なし';
+    },
+    StringtrueOrfalse2: function () {
+      return this.switch2 ? 'あり' : 'なし';
+    },
+    trueOrfalse: function() {
+       this.switch1 ? this.$store.dispatch('writeTestImage','/Elastic-Load-Balancing-ELB.png') : this.$store.dispatch('writeTestImage','')
+    },
+    trueOrfalse2: function() {
+       this.switch2 ? this.$store.dispatch('writeTestImage2','/Amazon-Simple-Storage-Service-S3.png') : this.$store.dispatch('writeTestImage2','')
+    },
+  },
   data() {
     return {
       clipped: false,
@@ -106,8 +104,6 @@ export default {
         setTimeout(() => (this[l] = false), 3000)
         this.loader = null
     },
-
-
   },
 }
 </script>
