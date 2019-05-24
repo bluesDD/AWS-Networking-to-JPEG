@@ -18,20 +18,38 @@
       :value="trueOrfalse"
     ></v-switch>
     <br>
-    <img class="img" :src="this.$store.state.testImage" />
+
+    <v-flex xs12 sm6 d-flex>
+        <v-select
+          :items="ec2"
+          label="EC2の数"
+        ></v-select>
+      </v-flex>
+
+        <v-flex xs12 sm6 d-flex>
+        <v-select
+          :items="db"
+          label="データベースの種類"
+        ></v-select>
+      </v-flex>
     <v-switch
       v-model="switch2"
-      :label="`S3の有無 : ${StringtrueOrfalse2}`"
+      :label="`S3の有無 : ${StringtrueOrfalse}`"
       :value="trueOrfalse2"
 
     ></v-switch>
     <br>
-    <img class="img" :src="this.$store.state.testImage2" />
       <p>store: {{ this.$store.state.hogeFromStore }}</p>
       <button v-on:click="$store.dispatch('writeHoge', '直接、値を書き換えます')">Test</button>
       <button v-on:click="$store.dispatch('writeHoge', 'Hello, Vuex')">Test2</button>
       <button v-on:click="testMethod()">Test3</button>
     <dir>
+    <p>{{ this.$store.commit('getImage') }}</p>
+    <p>{{ this.$store.state.targetImageUrl }}</p>
+  　<img class="img" :src="this.$store.state.testImage2" />
+
+    <img class="img" :src="this.$store.state.testImage" />
+    <br>
     <v-btn
       :loading="loading3"
       :disabled="loading3"
@@ -43,16 +61,15 @@
       <v-icon right dark>cloud_download</v-icon>
     </v-btn>
     </dir>
-
   </v-container >
 
 
-    <v-footer
-      :fixed="fixed"
-      app
-    >
-      <span>&copy; 2019</span>
-    </v-footer>
+  <v-footer
+    :fixed="fixed"
+    app
+  >
+    <span>&copy; 2019</span>
+  </v-footer>
   </v-app>
 </template>
 
@@ -94,7 +111,9 @@ export default {
       loading: false,
       loading2: false,
       loading3: false,
-      loading4: false
+      loading4: false,
+      ec2: [1,2,3],
+      db:['RDS', 'EC2', 'なし']
     }
   },
   watch: {
