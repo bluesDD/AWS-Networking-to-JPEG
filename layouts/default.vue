@@ -6,7 +6,8 @@
       :clipped-left="clipped"
       fixed
       app
-    >
+      dark
+      color="#ec7211"    >
       <v-toolbar-title v-text="title" />
       <v-spacer />
     </v-toolbar>
