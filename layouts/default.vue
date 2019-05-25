@@ -1,7 +1,6 @@
 <template>
   <v-app light>
     <v-container mt-10 pt-40>
-
     <v-toolbar
       :clipped-left="clipped"
       fixed
@@ -19,7 +18,6 @@
       :value="trueOrfalse"
     ></v-switch>
     <br>
-
     <v-flex xs12 sm6 d-flex>
         <v-select
           :items="ec2"
@@ -27,7 +25,6 @@
           v-model="ec2selected"
           return-object
           @input="countec2"
-
         ></v-select>
     </v-flex>
 
@@ -37,7 +34,7 @@
           :label="`データベースの種類: ${dbselected}`"
           v-model="dbselected"
           return-object
-          @input="countdb"
+          @input="selectdb"
         ></v-select>
     </v-flex>
     <v-switch
@@ -46,17 +43,15 @@
       :value="trueOrfalse2"
     ></v-switch>
     <br>
-      <p>store: {{ this.$store.state.hogeFromStore }}</p>
-      <button v-on:click="$store.dispatch('writeHoge', '直接、値を書き換えます')">Test</button>
-      <button v-on:click="$store.dispatch('writeHoge', 'Hello, Vuex')">Test2</button>
-      <button v-on:click="testMethod()">Test3</button>
     <dir>
     <p>{{ this.$store.commit('setImageUrl') }}</p>
     <p>{{ this.$store.state.targetImageUrl }}</p>
     <br>
+    <!--
   　<img class="img" :src="this.$store.state.testImage2" />
 
     <img class="img" :src="this.$store.state.testImage" />
+    -->
     <br>
     <v-btn
       :loading="loading3"
@@ -83,13 +78,6 @@
 
 <script>
 export default {
-  methods: {
-    testMethod() {
-      console.log(this.$store.state.hogeFromStore)
-      this.$store.dispatch('writeHoge', 'メソッドからの書き換え')
-      console.log(this.$store.state.hogeFromStore)
-    },
-  },
   computed:{
     StringtrueOrfalse: function () {
       return this.switch1 ? 'あり' : 'なし';
@@ -108,7 +96,7 @@ export default {
     },
     // here have to get index of db array!
     selectdb: function() {
-      if (this.dbselected) this.$store.dispatch('writeDB', this.dbselected.index)
+      if (this.dbselected) this.$store.dispatch('writeDB', this.db.findIndex(item => item === this.dbselected))
     }
   },
   data() {
