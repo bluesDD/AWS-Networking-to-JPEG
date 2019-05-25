@@ -6,7 +6,7 @@
       fixed
       app
       dark
-      color="#ec7211"    >
+      color="orange lighten-1"    >
       <v-toolbar-title v-text="title" />
       <v-spacer />
     </v-toolbar>
@@ -39,7 +39,7 @@
     </v-flex>
     <v-switch
       v-model="switch2"
-      :label="`S3の有無 : ${StringtrueOrfalse}`"
+      :label="`S3の有無 : ${StringtrueOrfalse2}`"
       :value="trueOrfalse2"
     ></v-switch>
     <br>
@@ -64,15 +64,19 @@
       <v-icon right dark>cloud_download</v-icon>
     </v-btn>
     </dir>
-  </v-container >
-
-
-  <v-footer
+    <v-footer
     :fixed="fixed"
     app
-  >
-    <span>&copy; 2019</span>
-  </v-footer>
+    >
+    <v-flex
+        py-3
+        text-xs-center
+        xs12
+      >
+        <strong>&copy;2019 — PjKoenji</strong>
+      </v-flex>
+    </v-footer>
+  </v-container >
   </v-app>
 </template>
 
