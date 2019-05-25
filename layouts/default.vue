@@ -23,21 +23,27 @@
     <v-flex xs12 sm6 d-flex>
         <v-select
           :items="ec2"
-          label="EC2の数"
-        ></v-select>
-      </v-flex>
+          :label="`EC2の数: ${ec2selected}`"
+          v-model="ec2selected"
+          return-object
+          @input="countec2"
 
-        <v-flex xs12 sm6 d-flex>
+        ></v-select>
+    </v-flex>
+
+    <v-flex xs12 sm6 d-flex>
         <v-select
           :items="db"
-          label="データベースの種類"
+          :label="`データベースの種類: ${dbselected}`"
+          v-model="dbselected"
+          return-object
+          @input="countdb"
         ></v-select>
-      </v-flex>
+    </v-flex>
     <v-switch
       v-model="switch2"
       :label="`S3の有無 : ${StringtrueOrfalse}`"
       :value="trueOrfalse2"
-
     ></v-switch>
     <br>
       <p>store: {{ this.$store.state.hogeFromStore }}</p>
@@ -45,8 +51,9 @@
       <button v-on:click="$store.dispatch('writeHoge', 'Hello, Vuex')">Test2</button>
       <button v-on:click="testMethod()">Test3</button>
     <dir>
-    <p>{{ this.$store.commit('getImage') }}</p>
+    <p>{{ this.$store.commit('setImageUrl') }}</p>
     <p>{{ this.$store.state.targetImageUrl }}</p>
+    <br>
   　<img class="img" :src="this.$store.state.testImage2" />
 
     <img class="img" :src="this.$store.state.testImage" />
@@ -91,11 +98,18 @@ export default {
       return this.switch2 ? 'あり' : 'なし';
     },
     trueOrfalse: function() {
-       this.switch1 ? this.$store.dispatch('writeTestImage','/Elastic-Load-Balancing-ELB.png') : this.$store.dispatch('writeTestImage','')
+      this.switch1 ? this.$store.dispatch('writeLB',1) : this.$store.dispatch('writeLB',0)
     },
     trueOrfalse2: function() {
-       this.switch2 ? this.$store.dispatch('writeTestImage2','/Amazon-Simple-Storage-Service-S3.png') : this.$store.dispatch('writeTestImage2','')
+      this.switch2 ? this.$store.dispatch('writeS3',1) : this.$store.dispatch('writeS3',0)
     },
+    countec2: function() {
+      if (this.ec2selected) this.$store.dispatch('writeEC2', this.ec2selected)
+    },
+    // here have to get index of db array!
+    selectdb: function() {
+      if (this.dbselected) this.$store.dispatch('writeDB', this.dbselected.index)
+    }
   },
   data() {
     return {
@@ -113,8 +127,10 @@ export default {
       loading2: false,
       loading3: false,
       loading4: false,
+      ec2selected: '',
       ec2: [1,2,3],
-      db:['RDS', 'EC2', 'なし']
+      db:['RDS', 'EC2', 'なし'],
+      dbselected: ''
     }
   },
   watch: {
